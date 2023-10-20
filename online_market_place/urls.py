@@ -19,10 +19,15 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from core.views import index,contact
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',include('core.urls')),
     path('items/', include('item.urls')),
     path('contact/',contact, name="contact"),
     path('admin/', admin.site.urls),
+    path('dashboard/', include('dashboard.urls')),
+    path('inbox/',include('conversation.urls')),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
